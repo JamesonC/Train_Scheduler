@@ -16,7 +16,7 @@
       var train = $(`#train-name-input`).val().trim();
       var destination = $(`#destination-input`).val().trim();
       var firstTrainTime = $(`#first-train-time-input`).val().trim();
-      var trainFrequency = $(`#train-frequency`).val().trim();
+      var trainFrequency = parseInt($(`#train-frequency`).val().trim());
 
       var newTrain = {
           train: train,
@@ -27,10 +27,10 @@
 
       database.ref().push(newTrain);
 
-      console.log(newTrain.train);
-      console.log(newTrain.destination);
-      console.log(newTrain.firstTrainTime);
-      console.log(newTrain.trainFrequency);
+      //console.log(newTrain.train);
+      //console.log(newTrain.destination);
+      //console.log(newTrain.firstTrainTime);
+      //console.log(newTrain.trainFrequency);
 
       train = $(`#train-name-input`).val("");
       destination = $(`#destination-input`).val("");
@@ -42,14 +42,19 @@
 
       var train = childSnapshot.val().train;
       var destination = childSnapshot.val().destination;
-      var trainFrequency = childSnapshot.val().trainFrequency;
+      var trainFrequency = parseInt(childSnapshot.val().trainFrequency);
       var firstTrainTime = childSnapshot.val().firstTrainTime;
+
+      // converted time variables
+      var nextArrival = moment().add(trainFrequency, 'minutes').format('LT');
+
 
       var newTr = {
         train: train,
         destination: destination,
         trainFrequency: trainFrequency,
-        firstTrainTime: firstTrainTime
+        firstTrainTime: firstTrainTime,
+        nextArrival: nextArrival
     };
 
       console.log(childSnapshot.val());
@@ -63,7 +68,8 @@
         <tr>
             <td>${data.train}</td>
             <td>${data.destination}</td>
-            <td>${parseInt(data.trainFrequency)}</td>
+            <td>${data.trainFrequency}</td>
+            <td>${data.nextArrival}</td>
         </tr>
       `
   }
