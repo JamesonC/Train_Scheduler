@@ -14,6 +14,8 @@
   $(`#add-train-btn`).click(function (event) {
       event.preventDefault();
 
+      $('#modal').modal('hide');
+
       var train = $(`#train-name-input`).val().trim();
       var destination = $(`#destination-input`).val().trim();
       var firstTrainTime = moment($(`#first-train-time-input`).val().trim(), "HH:mm").subtract(10, "years").format("X");
