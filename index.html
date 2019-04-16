@@ -36,11 +36,54 @@
         <div class="jumbotron" style="background-color: black; color: white">
             <h1 class="text-center">Train Schedule</h1>
             <h3 class="text-center">A Comprehensive Scheduler for Incoming Trains</h3>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add
+                Train</button>
         </div>
 
         <div class="row">
 
             <div class="col-md-12">
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- Add Employee  -->
+                                    <div class="card mb-4">
+                                        <div class="card-header">Add Train</div>
+                                        <div class="card-body">
+
+                                            <!-- Entry Form -->
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="employee-name-input">Train Name</label>
+                                                    <input class="form-control" id="train-name-input" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="role-input">Destination</label>
+                                                    <input class="form-control" id="destination-input" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="start-input">First Train Time (HH:mm - Military
+                                                        Time)</label>
+                                                    <input class="form-control" id="first-train-time-input" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rate-input">Frequency (min)</label>
+                                                    <input class="form-control" id="train-frequency" type="text">
+                                                </div>
+                                                <button class="btn btn-primary" id="add-train-btn">Submit</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Current Employees-->
                 <div class="card mb-4">
@@ -63,40 +106,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Add Employee  -->
-                <div class="card mb-4">
-                    <div class="card-header">Add Train</div>
-                    <div class="card-body">
-
-                        <!-- Entry Form -->
-                        <form>
-                            <div class="form-group">
-                                <label for="employee-name-input">Train Name</label>
-                                <input class="form-control" id="train-name-input" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="role-input">Destination</label>
-                                <input class="form-control" id="destination-input" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="start-input">First Train Time (HH:mm - Military Time)</label>
-                                <input class="form-control" id="first-train-time-input" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="rate-input">Frequency (min)</label>
-                                <input class="form-control" id="train-frequency" type="text">
-                            </div>
-                            <button class="btn btn-primary" id="add-train-btn">Submit</button>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- JavaScript -->

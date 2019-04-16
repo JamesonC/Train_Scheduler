@@ -7,6 +7,7 @@
       storageBucket: "train-scheduler-ba389.appspot.com",
       messagingSenderId: "536871174028"
   };
+
   firebase.initializeApp(config);
   var database = firebase.database();
 
@@ -45,7 +46,7 @@
       var trainFrequency = childSnapshot.val().trainFrequency;
       var firstTrainTime = childSnapshot.val().firstTrainTime;
       
-      var timeRemainder = moment().diff(moment.unix(firstTrainTime), "minutes") % trainFrequency ;
+      var timeRemainder = moment().diff(moment.unix(firstTrainTime), "minutes") % trainFrequency;
       var minutesAway = trainFrequency - timeRemainder;
       var nextTrainArrival = moment().add(minutesAway, "m").format("hh:mm A"); 
 
@@ -62,7 +63,7 @@
           minutesAway: minutesAway
       };
 
-      $("tbody").append(makeRow(newTr));
+      $("tbody").prepend(makeRow(newTr));
 
   })
 
