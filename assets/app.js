@@ -15,8 +15,8 @@
 
       var train = $(`#train-name-input`).val().trim();
       var destination = $(`#destination-input`).val().trim();
-      var firstTrainTime = $(`#first-train-time-input`).val().trim();
-      var trainFrequency = parseInt($(`#train-frequency`).val().trim());
+      var firstTrainTime = moment($(`#first-train-time-input`).val().trim(), "HH:mm").subtract(10, "years").format("X");
+      var trainFrequency = $(`#train-frequency`).val().trim();
 
       var newTrain = {
           train: train,
@@ -42,34 +42,39 @@
 
       var train = childSnapshot.val().train;
       var destination = childSnapshot.val().destination;
-      var trainFrequency = parseInt(childSnapshot.val().trainFrequency);
+      var trainFrequency = childSnapshot.val().trainFrequency;
       var firstTrainTime = childSnapshot.val().firstTrainTime;
+      
+      var timeRemainder = moment().diff(moment.unix(firstTrainTime), "minutes") % trainFrequency ;
+      var minutesAway = trainFrequency - timeRemainder;
+      var nextTrainArrival = moment().add(minutesAway, "m").format("hh:mm A"); 
 
-      // converted time variables
-      var nextArrival = moment().add(trainFrequency, 'minutes').format('LT');
-
+      // console.log(minutesAway);
+      // console.log(nextTrainArrival);
+      // console.log(moment().format("hh:mm A"));
 
       var newTr = {
-        train: train,
-        destination: destination,
-        trainFrequency: trainFrequency,
-        firstTrainTime: firstTrainTime,
-        nextArrival: nextArrival
-    };
+          train: train,
+          destination: destination,
+          trainFrequency: trainFrequency,
+          firstTrainTime: firstTrainTime,
+          nextTrainArrival: nextTrainArrival, 
+          minutesAway: minutesAway
+      };
 
-      console.log(childSnapshot.val());
-      console.log(trainFrequency);
       $("tbody").append(makeRow(newTr));
 
   })
 
+  // template literal for row data
   function makeRow(data) {
       return `
         <tr>
             <td>${data.train}</td>
             <td>${data.destination}</td>
             <td>${data.trainFrequency}</td>
-            <td>${data.nextArrival}</td>
+            <td>${data.nextTrainArrival}</td>
+            <td>${data.minutesAway}</td>
         </tr>
       `
   }
